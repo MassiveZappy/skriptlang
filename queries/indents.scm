@@ -1,20 +1,27 @@
 [
-  (if_statement)
-  (loop_statement)
-  (try_catch_statement)
-  (event_handler)
-  (command_handler)
-  (function_declaration)
-  (section)
+ (select)
+ (cte)
+ (column_definitions)
+ (case)
+ (subquery)
+ (insert)
 ] @indent.begin
 
+
+(block
+  (keyword_begin)
+) @indent.begin
+
+(column_definitions ")" @indent.branch)
+
+(subquery ")" @indent.branch)
+
+(cte ")" @indent.branch)
+
 [
-  "else:"
-  "catch:"
+ (keyword_end)
+ (keyword_values)
+ (keyword_into)
 ] @indent.branch
 
-(command_handler "trigger:") @indent.branch
-
-(function_declaration ":") @indent.branch
-
-(event_handler ":") @indent.branch
+(keyword_end) @indent.end
