@@ -1,27 +1,14 @@
-# Dependencies
-node_modules/
-package-lock.json
-yarn.lock
-
-# sql example
-tree-sitter-sql
-
-# Generated files
-*.wasm
-*.obj
-*.o
-*.a
-bindings/
-build/
+tmp/
+Cargo.lock
+node_modules
+.node-version
+build
 *.log
-
-# Editor files
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-
-# OS files
-.DS_Store
-Thumbs.db
+/test.js
+/examples/npm
+package-lock.json
+/target/
+/.build/
+/src/tree_sitter/
+/src/parser.c
+/src/*.json
