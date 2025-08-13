@@ -5,7 +5,9 @@
   "main": "bindings/node",
   "scripts": {
     "build": "tree-sitter generate",
-    "test": "tree-sitter test"
+    "test": "tree-sitter test",
+    "prepare-extension": "mkdir -p dist/grammars && cp -r src dist/grammars/skriptlang && cp -r queries dist/",
+    "package": "npm run build && npm run prepare-extension && cd dist && zip -r ../skriptlang-extension.zip *"
   },
   "keywords": [
     "parser",
@@ -14,7 +16,8 @@
     "language",
     "tree-sitter",
     "grammar",
-    "minecraft"
+    "minecraft",
+    "zed-editor"
   ],
   "author": "",
   "license": "MIT",
@@ -37,5 +40,15 @@
         "queries/indents.scm"
       ]
     }
-  ]
+  ],
+  "zed": {
+    "name": "skriptlang",
+    "version": "0.1.0",
+    "description": "Skript language support for Zed Editor",
+    "author": "",
+    "repository": "https://github.com/user/tree-sitter-skriptlang",
+    "grammars": {
+      "skriptlang": "grammars/skriptlang"
+    }
+  }
 }
