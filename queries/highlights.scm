@@ -1,97 +1,119 @@
-; Comments
-(comment) @comment
-
 ; Keywords
 [
-  "on"
-  "options"
-  "command"
-  "trigger"
-  "permission"
-  "set"
   "if"
-  "else"
-  "loop"
-  "while"
-  "try"
-  "catch"
-  "wait"
-  "give"
+  "else:"
+  "set"
+  "to"
   "send"
   "broadcast"
+  "loop"
+  "add"
+  "remove"
+  "from"
+  "wait"
+  "give"
+  "try:"
+  "catch:"
   "increment"
-  "decrement"
-  "stop"
-  "exit"
-  "every"
-  "to"
-  "of"
-  "is"
-  "has"
-  "does"
-  "not"
   "by"
-  "between"
-  "in"
-  "around"
-  "and"
-  "or"
+  "decrement"
+  "times"
+  "on"
+  "command"
+  "trigger:"
+  "function"
+  "options:"
+  "permission:"
 ] @keyword
 
 ; Operators
 [
   "="
-  "=="
-  "!="
   ">"
   "<"
   ">="
   "<="
+  "!="
+  "and"
+  "or"
+  "not"
+  "is"
+  "has"
+  "contains"
 ] @operator
 
-; Variables
-(variable) @variable
+; Types
+[
+  "text"
+  "number"
+  "player"
+  "item"
+  "block"
+  "entity"
+  "location"
+  "world"
+  "timespan"
+] @type.builtin
 
-; Placeholders (expressions in %)
-(placeholder) @string.special
-
-; String literals
-(string) @string
-
-; Numbers
-(number) @number
-
-; Boolean literals
+; Literals
 [
   "true"
   "false"
 ] @boolean
 
-; Time spans
-(timespan) @number.special
+; Numbers
+(number) @number
 
-; Functions/methods
+; Strings
+(string_value) @string
+
+; Comments
+(comment) @comment @spell
+
+; Functions & Calls
+(function_declaration
+  (identifier) @function)
+
 (function_call
-  function: (identifier) @function)
+  (identifier) @function.call)
 
-; Event types
-(event_type) @function.special
+; Events
+(event_handler
+  (event_name) @event)
 
-; Property access
-(property_access
-  property: (identifier) @property)
+; Variables
+(variable_name) @variable
 
-; Option definitions in options section
-(option_definition
-  key: (identifier) @property)
+(variable) @variable
 
-; Command definitions
-(command_declaration
-  name: (_) @function.macro)
+; Parameters
+(command_arguments
+  (identifier) @parameter)
 
-; Permission declarations
-(permission_declaration
-  permission: (_) @variable.builtin)
+(parameters
+  (identifier) @parameter)
 
-; Event values like 'player', 'event-block', etc.
-(event_value) @variable.builtin
+; Event values
+[
+  "event-block"
+  "event-entity"
+  "player"
+  "loop-player"
+  "loop-value"
+  "loop-index"
+  "loop-value-2"
+  "loop-block"
+] @constant
+
+; Punctuation
+[
+  "{"
+  "}"
+  "("
+  ")"
+  ":"
+  "::"
+] @punctuation
+
+; Identifiers (catch-all)
+(identifier) @variable

@@ -1,23 +1,21 @@
 {
-  "name": "tree-sitter-skript",
+  "name": "tree-sitter-skriptlang",
   "version": "0.1.0",
-  "description": "Skript grammar for tree-sitter",
+  "description": "Skript grammar for Tree-sitter",
   "main": "bindings/node",
-  "keywords": [
-    "parser",
-    "skript",
-    "tree-sitter"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/username/tree-sitter-skript.git"
-  },
   "scripts": {
     "build": "tree-sitter generate",
-    "test": "tree-sitter test",
-    "parse": "tree-sitter parse",
-    "highlight": "tree-sitter highlight"
+    "test": "tree-sitter test"
   },
+  "keywords": [
+    "parser",
+    "lexer",
+    "skript",
+    "language",
+    "tree-sitter",
+    "grammar",
+    "minecraft"
+  ],
   "author": "",
   "license": "MIT",
   "dependencies": {
@@ -25,5 +23,19 @@
   },
   "devDependencies": {
     "tree-sitter-cli": "^0.20.8"
-  }
+  },
+  "tree-sitter": [
+    {
+      "scope": "source.skript",
+      "file-types": [
+        "sk"
+      ],
+      "highlights": [
+        "queries/highlights.scm"
+      ],
+      "indents": [
+        "queries/indents.scm"
+      ]
+    }
+  ]
 }
