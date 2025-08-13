@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.13)
 
-project(tree-sitter-sql
+project(tree-sitter-skript
         VERSION "0.3.8"
-        DESCRIPTION "Tree-sitter Grammar for SQL"
-        HOMEPAGE_URL "git+https://github.com/derekstride/tree-sitter-sql.git"
+        DESCRIPTION "Tree-sitter Grammar for skript"
+        HOMEPAGE_URL "git+https://github.com/derekstride/tree-sitter-skript.git"
         LANGUAGES C)
 
 option(BUILD_SHARED_LIBS "Build using shared libraries" ON)
@@ -24,33 +24,33 @@ add_custom_command(OUTPUT "${CMAKE_CURRENT_SOURCE_DIR}/src/parser.c"
                    WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
                    COMMENT "Generating parser.c")
 
-add_library(tree-sitter-sql src/parser.c)
+add_library(tree-sitter-skript src/parser.c)
 if(EXISTS src/scanner.c)
-  target_sources(tree-sitter-sql PRIVATE src/scanner.c)
+  target_sources(tree-sitter-skript PRIVATE src/scanner.c)
 endif()
-target_include_directories(tree-sitter-sql PRIVATE src)
+target_include_directories(tree-sitter-skript PRIVATE src)
 
-target_compile_definitions(tree-sitter-sql PRIVATE
+target_compile_definitions(tree-sitter-skript PRIVATE
                            $<$<BOOL:${TREE_SITTER_REUSE_ALLOCATOR}>:TREE_SITTER_REUSE_ALLOCATOR>
                            $<$<CONFIG:Debug>:TREE_SITTER_DEBUG>)
 
-set_target_properties(tree-sitter-sql
+set_target_properties(tree-sitter-skript
                       PROPERTIES
                       C_STANDARD 11
                       POSITION_INDEPENDENT_CODE ON
                       SOVERSION "${TREE_SITTER_ABI_VERSION}.${PROJECT_VERSION_MAJOR}"
                       DEFINE_SYMBOL "")
 
-configure_file(bindings/c/tree-sitter-sql.pc.in
-               "${CMAKE_CURRENT_BINARY_DIR}/tree-sitter-sql.pc" @ONLY)
+configure_file(bindings/c/tree-sitter-skript.pc.in
+               "${CMAKE_CURRENT_BINARY_DIR}/tree-sitter-skript.pc" @ONLY)
 
 include(GNUInstallDirs)
 
-install(FILES bindings/c/tree-sitter-sql.h
+install(FILES bindings/c/tree-sitter-skript.h
         DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/tree_sitter")
-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/tree-sitter-sql.pc"
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/tree-sitter-skript.pc"
         DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/pkgconfig")
-install(TARGETS tree-sitter-sql
+install(TARGETS tree-sitter-skript
         LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}")
 
 add_custom_target(test "${TREE_SITTER_CLI}" test

@@ -2,16 +2,16 @@
 import PackageDescription
 
 let package = Package(
-    name: "TreeSitterSql",
+    name: "TreeSitterskript",
     products: [
-        .library(name: "TreeSitterSql", targets: ["TreeSitterSql"]),
+        .library(name: "TreeSitterskript", targets: ["TreeSitterskript"]),
     ],
     dependencies: [
         .package(url: "https://github.com/ChimeHQ/SwiftTreeSitter", from: "0.8.0"),
     ],
     targets: [
         .target(
-            name: "TreeSitterSql",
+            name: "TreeSitterskript",
             dependencies: [],
             path: ".",
             sources: [
@@ -25,12 +25,12 @@ let package = Package(
             cSettings: [.headerSearchPath("src")]
         ),
         .testTarget(
-            name: "TreeSitterSqlTests",
+            name: "TreeSitterskriptTests",
             dependencies: [
                 "SwiftTreeSitter",
-                "TreeSitterSql",
+                "TreeSitterskript",
             ],
-            path: "bindings/swift/TreeSitterSqlTests"
+            path: "bindings/swift/TreeSitterskriptTests"
         )
     ],
     cLanguageStandard: .c11

@@ -1,13 +1,12 @@
 [package]
 name = "tree-sitter-sequel"
-description = "Tree-sitter Grammar for SQL"
+description = "Tree-sitter Grammar for skript"
 version = "0.3.8"
 authors = ["derek stride"]
 license = "MIT"
 readme = "README.md"
-keywords = ["incremental", "parsing", "tree-sitter", "sql"]
+keywords = ["incremental", "parsing", "tree-sitter", "skript"]
 categories = ["parsing", "text-editors"]
-repository = "https://github.com/derekstride/tree-sitter-sql.git"
 edition = "2021"
 autoexamples = false
 

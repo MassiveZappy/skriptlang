@@ -1,0 +1,33 @@
+{
+  "grammars": [
+    {
+      "name": "skript",
+      "camelcase": "skript",
+      "scope": "source.skript",
+      "path": ".",
+      "file-types": ["skript"],
+      "highlights": ["queries/highlights.scm"]
+    }
+  ],
+  "metadata": {
+    "version": "0.3.8",
+    "license": "MIT",
+    "description": "Tree-sitter Grammar for skript",
+    "authors": [
+      {
+        "name": "derek stride"
+      }
+    ],
+    "links": {
+      "repository": "git+https://github.com/derekstride/tree-sitter-skript.git"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true
+  }
+}
