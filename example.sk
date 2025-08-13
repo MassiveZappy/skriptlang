@@ -1,0 +1,67 @@
+# Example skript file
+
+# Chop Vein Miner Enchantment (zappyenchants:chop)
+# Breaks up to 64 connected logs (including diagonals) when breaking a log with a Chop-enchanted tool.
+# Supports Unbreaking and vanilla durability/hunger mechanics. Never breaks the tool from vein mining.
+
+options:
+    enchantment: zappyenchants:chop
+    disabled: true
+    remove: true
+    permission: "zappyenchants.use.chop"
+    adminPermission: "zappyenchants.admin.chop"
+    blocks_per_level: 3
+    max_blocks: 64
+    log_types: oak log or spruce log or birch log or jungle log or acacia log or dark oak log or mangrove log or cherry log or pale oak log or crimson stem or warped stem
+
+on block break:
+    if player has permission {@permission}:
+        if event-block is {@log_types}:
+            set {_level} to int tag "minecraft:enchantments;zappyenchants:chop" of nbt of player's tool
+            if {_level} > 0:
+                if {@disabled} is true:
+                    if player does not have permission {@adminPermission}:
+                        send "Chop enchantment has been deactivated until further notice!"
+                        if {@remove} is true:
+                            command "disenchant %player% zappyenchants:chop"
+                        stop trigger
+                set {_unbreaking} to 0
+                set {_tool} to player's tool
+                if {_tool} is enchanted with unbreaking:
+                    set {_unbreaking} to int tag "minecraft:enchantments;minecraft:unbreaking" of nbt of player's tool
+                set {_origin} to event-block
+                set {_blocks::*} to {_origin}
+                set {_checked::*} to "%{_origin}%"
+                set {_i} to 1
+                while {_i} <= the number of {_blocks::*}:
+                    if {_i} > {@max_blocks}:
+                        exit loop
+                    if {_i} > {@blocks_per_level} * {_level}:
+                        exit loop
+                    set {_block} to {_blocks::%{_i}%}
+                    loop blocks in radius 2 around {_block}:
+                        set {_adj} to loop-block
+                        set {_loc} to "%{_adj}%"
+                        set {_found} to false
+                        loop {_checked::*}:
+                            if loop-value-2 is {_loc}:
+                                set {_found} to true
+                        if {_found} is false:
+                            if {_adj} is {@log_types}:
+                                add {_adj} to {_blocks::*}
+                                add {_loc} to {_checked::*}
+                                break {_adj} naturally using {_tool}
+                                if random integer between 1 and ({_unbreaking} + 1) is 1:
+                                    remove 1 from the durability of player's tool
+                                    if durability of player's tool - 1 = 0:
+                                        send "&cCareful to not break that!"
+                                        exit loop
+                                if the player's food level is not 0:
+                                    set the player's food level to the player's food level - 0.1
+                                    if the player's food level = 0:
+                                        send "&cYou are hungry!"
+                                        exit loop
+                                set {_wait} to 6 - {_level}
+                                wait "%{_wait}% ticks" parsed as timespan
+                    add 1 to {_i}
+                remove {_origin} from {_blocks::*}

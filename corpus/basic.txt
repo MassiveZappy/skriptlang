@@ -1,0 +1,152 @@
+=====================================
+Comments and Basic Structure
+=====================================
+
+# Basic comment
+# This is a Skript file
+options:
+    enchantment: zappyenchants:chop
+    disabled: true
+    remove: true
+
+---
+
+(source_file
+  (comment)
+  (comment)
+  (options_section
+    (option_definition
+      key: (identifier)
+      value: (identifier))
+    (option_definition
+      key: (identifier)
+      value: (boolean))
+    (option_definition
+      key: (identifier)
+      value: (boolean))))
+
+=====================================
+Event Handler
+=====================================
+
+on block break:
+    if player has permission "{@permission}":
+        send "You broke a block!" to player
+        set {_level} to 5
+
+---
+
+(source_file
+  (event_handler
+    event: (event_type
+      (identifier)
+      (identifier))
+    (conditional_statement
+      condition: (comparison_expression
+        left: (event_value)
+        operator: (has)
+        right: (placeholder
+          (string)))
+      (command_statement
+        message: (string)
+        recipient: (event_value))
+      (assignment_statement
+        variable: (variable
+          name: (identifier))
+        value: (number)))))
+
+=====================================
+Command Definition
+=====================================
+
+command /playercount:
+    permission: playercount.use
+    trigger:
+        send "The current player count is %{player_count}%" to player
+
+---
+
+(source_file
+  (command_declaration
+    name: (identifier)
+    (permission_declaration
+      permission: (identifier))
+    (trigger_section
+      (command_statement
+        message: (string
+          (placeholder
+            (variable
+              name: (identifier))))
+        recipient: (event_value)))))
+
+=====================================
+Loops and Conditions
+=====================================
+
+on join:
+    increment {player_count} by 1
+    broadcast "%player%'s has joined the server!"
+    if {player_count} > 10:
+        broadcast "We have more than 10 players online! Awesome!"
+    else:
+        broadcast "We need more players!"
+
+---
+
+(source_file
+  (event_handler
+    event: (event_type
+      (identifier))
+    (assignment_statement
+      variable: (variable
+        name: (identifier))
+      value: (number))
+    (command_statement
+      message: (string
+        (placeholder
+          (event_value))))
+    (conditional_statement
+      condition: (comparison_expression
+        left: (variable
+          name: (identifier))
+        operator: (>)
+        right: (number))
+      (command_statement
+        message: (string))
+      (command_statement
+        message: (string)))))
+
+=====================================
+Timed Events
+=====================================
+
+every 10 seconds:
+    loop all players:
+        if loop-player's food level < 10:
+            set loop-player's food level to 20
+            send "Your food level has been replenished!" to loop-player
+
+---
+
+(source_file
+  (timed_event
+    interval: (timespan
+      (number)
+      (seconds))
+    (loop_statement
+      target: (identifier)
+      (conditional_statement
+        condition: (comparison_expression
+          left: (property_access
+            object: (event_value)
+            property: (identifier))
+          operator: (<)
+          right: (number))
+        (assignment_statement
+          variable: (property_access
+            object: (event_value)
+            property: (identifier))
+          value: (number))
+        (command_statement
+          message: (string)
+          recipient: (event_value))))))
